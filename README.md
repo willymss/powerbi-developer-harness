@@ -14,7 +14,7 @@ It is a hybrid of three sources:
 - **Guardrails** learned the hard way on production PBIP projects: hooks that stop a canvas reload over unsaved
   work, block hand edits of undocumented report files, strip BOMs, and refuse to finish without evidence.
 
-Full documentation: [`docs/index.html`](docs/index.html).
+Full documentation: **https://willymss.github.io/powerbi-developer-harness/** (source: [`docs/index.html`](docs/index.html)).
 
 ## Install on a new machine
 
@@ -76,7 +76,7 @@ pwsh -NoProfile -File scripts\validate.ps1
 ```
 .claude-plugin/marketplace.json     marketplace (allows dependencies on power-bi-agentic-development)
 plugins/powerbi-developer/          the plugin: skills, agents, hooks, scripts, templates, evals, harness-template
-docs/index.html                     documentation page
+docs/index.html                     documentation page, served by GitHub Pages (main branch, /docs)
 scripts/bootstrap.ps1               new-machine setup
 scripts/validate.ps1                manifest, syntax and portability checks (also run in CI)
 ```
