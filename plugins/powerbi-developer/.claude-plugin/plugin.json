@@ -21,7 +21,6 @@
     "fabric"
   ],
   "skills": "./skills/",
-  "hooks": "./hooks/hooks.json",
   "mcpServers": "./.mcp.json",
   "experimental": {
     "evals": "./evals/"
