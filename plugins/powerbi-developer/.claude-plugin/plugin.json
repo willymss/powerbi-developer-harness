@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "powerbi-developer",
+  "displayName": "Power BI Developer",
+  "description": "Plan -> design contract -> approval -> pbir batch build -> validate -> guarded Desktop reload -> screenshot -> independent review -> publish for Power BI reports and semantic models on Windows. Routes to the data-goblin plugins (pbir, te, connect-pbid, tmdl, fabric-cli) and Microsoft tools (powerbi-modeling-mcp, powerbi-desktop, powerbi-report-author); enforces the loop with hooks.",
+  "author": {
+    "name": "W. Moureira dos Santos",
+    "email": "williamthedrumer@gmail.com"
+  },
+  "homepage": "https://github.com/willymss/powerbi-developer-harness",
+  "repository": "https://github.com/willymss/powerbi-developer-harness",
+  "license": "MIT",
+  "keywords": [
+    "power-bi",
+    "pbir",
+    "pbip",
+    "tmdl",
+    "semantic-model",
+    "power-bi-desktop",
+    "tabular-editor",
+    "fabric"
+  ],
+  "skills": "./skills/",
+  "hooks": "./hooks/hooks.json",
+  "mcpServers": "./.mcp.json",
+  "experimental": {
+    "evals": "./evals/"
+  }
+}

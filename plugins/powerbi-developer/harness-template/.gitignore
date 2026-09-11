@@ -1,0 +1,7 @@
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+**/.pbi/editorSettings.json
+_verify/
+screenshots/
+*.pbir-restore-tmp/
+.claude/settings.local.json

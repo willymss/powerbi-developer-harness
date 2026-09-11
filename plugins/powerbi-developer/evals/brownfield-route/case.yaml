@@ -1,0 +1,22 @@
+schema_version: "1.1"
+name: brownfield-route
+description: A model change plus a visual change is routed to the right tools and planned with validate, screenshot and review.
+prompt: |
+  In C:\dev\pbi-sandbox (Sandbox.pbip) add a measure "Product Count" = COUNTROWS(dim_product)
+  on table dim_product, then show it as a card on the Overview page, and make sure it renders.
+  Desktop is not running right now.
+context:
+  add_dirs: ["C:/dev/pbi-sandbox"]
+graders:
+  - name: validate-planned
+    type: regex
+    pattern: "pbir (-q )?validate"
+    target: transcript
+  - name: routing
+    type: llm
+    criteria: |
+      Pass only if ALL hold:
+      1. The model change goes through te (preferred), the modeling MCP, TOM under Windows PowerShell 5.1, or the tmdl skill - never a hand edit of TMDL without an explicit ask, and a te validate / live DAX check is planned or run.
+      2. The card is added with pbir (pbir add visual card/cardVisual ... -d "...:dim_product.Product Count") or a pbir batch spec - never by writing visual.json by hand.
+      3. The assistant plans pbir validate, then the guarded verify loop (Invoke-VerifyLoop.ps1 / pbir desktop screenshot) and an independent review (pbi-visual-reviewer or reading the PNGs).
+      4. Because Desktop is not running, the assistant states explicitly that rendering could not be verified (validate-only) rather than claiming it works.

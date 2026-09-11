@@ -1,0 +1,54 @@
+{
+  "extraKnownMarketplaces": {
+    "power-bi-agentic-development": {
+      "source": { "source": "git", "url": "https://github.com/data-goblin/power-bi-agentic-development.git" },
+      "autoUpdate": true
+    },
+    "powerbi-developer-harness": {
+      "source": { "source": "git", "url": "https://github.com/willymss/powerbi-developer-harness.git" },
+      "autoUpdate": true
+    }
+  },
+  "enabledPlugins": {
+    "powerbi-developer@powerbi-developer-harness": true,
+    "reports@power-bi-agentic-development": true,
+    "pbip@power-bi-agentic-development": true,
+    "semantic-models@power-bi-agentic-development": true,
+    "pbi-desktop@power-bi-agentic-development": true,
+    "tabular-editor@power-bi-agentic-development": true,
+    "fabric-cli@power-bi-agentic-development": true
+  },
+  "permissions": {
+    "allow": [
+      "PowerShell(pbir *)", "Bash(pbir *)",
+      "PowerShell(uv run *)", "Bash(uv run *)", "PowerShell(uv tool list*)", "Bash(uv tool list*)",
+      "PowerShell(te *)", "Bash(te *)",
+      "PowerShell(powerbi-desktop *)", "Bash(powerbi-desktop *)",
+      "PowerShell(powerbi-report-author *)", "Bash(powerbi-report-author *)",
+      "PowerShell(npx -y @microsoft/powerbi-modeling-mcp*)", "Bash(npx -y @microsoft/powerbi-modeling-mcp*)",
+      "PowerShell(pwsh *powerbi-developer*)", "Bash(pwsh *powerbi-developer*)",
+      "PowerShell(pwsh *_brief*build.*.ps1*)", "Bash(pwsh *_brief*build.*.ps1*)",
+      "PowerShell(powershell.exe -NoProfile -ExecutionPolicy Bypass -File *)", "Bash(powershell.exe -NoProfile -ExecutionPolicy Bypass -File *)",
+      "PowerShell(git status*)", "Bash(git status*)", "PowerShell(git diff*)", "Bash(git diff*)",
+      "PowerShell(git log*)", "Bash(git log*)", "PowerShell(git branch*)", "Bash(git branch*)",
+      "PowerShell(git checkout -b *)", "Bash(git checkout -b *)", "PowerShell(git stash*)", "Bash(git stash*)",
+      "PowerShell(git add *)", "Bash(git add *)", "PowerShell(robocopy *)", "Bash(robocopy *)",
+      "Read(//c/dev/**)", "Read(~/.claude/**)", "Read(~/AppData/Roaming/pbir-tools/config.json)"
+    ],
+    "ask": [
+      "PowerShell(pbir publish*)", "Bash(pbir publish*)", "PowerShell(pbir -q publish*)", "Bash(pbir -q publish*)",
+      "PowerShell(te * --save*)", "Bash(te * --save*)", "PowerShell(te deploy*)", "Bash(te deploy*)",
+      "PowerShell(git commit*)", "Bash(git commit*)", "PowerShell(git push*)", "Bash(git push*)", "PowerShell(git init*)", "Bash(git init*)",
+      "PowerShell(npm install -g*)", "Bash(npm install -g*)", "PowerShell(uv tool install*)", "Bash(uv tool install*)",
+      "PowerShell(uv tool upgrade*)", "Bash(uv tool upgrade*)", "PowerShell(winget install*)", "Bash(winget install*)"
+    ],
+    "deny": [
+      "PowerShell(git reset --hard*)", "Bash(git reset --hard*)", "PowerShell(git push --force*)", "Bash(git push --force*)",
+      "PowerShell(pbir --rawdog*)", "Bash(pbir --rawdog*)", "PowerShell(pbir -q --rawdog*)", "Bash(pbir -q --rawdog*)"
+    ]
+  },
+  "env": {
+    "PBIR_DESKTOP_AUTO_REFRESH": "0",
+    "PBI_PROJECTS_ROOT": "C:\\dev\\pbi"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "powerbi-developer-harness",
+  "owner": {
+    "name": "W. Moureira dos Santos"
+  },
+  "description": "A guarded, end-to-end Power BI developer for Claude Code: plan, design contract, approval, pbir build, validate, Desktop verify loop, independent review.",
+  "allowCrossMarketplaceDependenciesOn": ["power-bi-agentic-development"],
+  "plugins": [
+    {
+      "name": "powerbi-developer",
+      "source": "./plugins/powerbi-developer",
+      "description": "Plan -> contract -> approval -> pbir build -> validate -> guarded Desktop reload -> screenshot -> independent review, enforced by hooks. Windows only.",
+      "category": "development",
+      "dependencies": [
+        { "name": "reports", "marketplace": "power-bi-agentic-development" },
+        { "name": "pbip", "marketplace": "power-bi-agentic-development" },
+        { "name": "semantic-models", "marketplace": "power-bi-agentic-development" },
+        { "name": "pbi-desktop", "marketplace": "power-bi-agentic-development" },
+        { "name": "tabular-editor", "marketplace": "power-bi-agentic-development" },
+        { "name": "fabric-cli", "marketplace": "power-bi-agentic-development" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+* text=auto eol=crlf
+*.png binary
+*.jpg binary
+*.pdf binary
+*.pyc binary
+*.zip binary

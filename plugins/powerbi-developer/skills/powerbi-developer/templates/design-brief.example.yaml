@@ -1,0 +1,194 @@
+# Complete, valid two-page design contract (FHD). This file is the fixture for
+# compile_brief_to_batch.py and the eval cases; it also documents every field.
+# Field names outside the pbir_* prefix match Microsoft's powerbi-report-design brief
+# (microsoft/skills-for-fabric, MIT; see THIRD_PARTY_NOTICES.md in the repo root).
+# The model is a neutral retail example: fact_sales, dim_product, dim_date.
+Design Brief:
+  generated_by: powerbi-developer
+  contract_version: 1
+  mode: greenfield
+  design_identity:
+    tone: executive
+    signature: "single accent colour on a quiet neutral canvas; one hero insight per page"
+  archetype: executive_summary_a
+  theme:
+    pbir_template: null          # a pbir theme template name, or null to keep the report theme
+    data_colors: ["#1F4E79", "#7F7F7F", "#C00000", "#00B050", "#ED7D31", "#5B9BD5"]
+  color_map:
+    - role: primary
+      hex: "#1F4E79"
+      use: "brand accent, hero card value, primary series"
+    - role: neutral
+      hex: "#7F7F7F"
+      use: "secondary series, axis labels"
+    - role: bad
+      hex: "#C00000"
+      use: "negative variance"
+    - role: good
+      hex: "#00B050"
+      use: "positive variance"
+  interaction_pattern: "slicers on the header band cross-filter every visual; no drill-through"
+  accessibility: "text contrast >= 4.5:1; every visual has a title; no colour-only encoding"
+  filters:
+    - scope: page
+      page: Executive Summary
+      table: dim_date
+      field: Year
+      type: Categorical
+      values: ["2026"]
+  pages:
+    - name: Executive Summary
+      role: overview
+      archetype: executive_summary_a
+      layout_variant: inline_slicers
+      variant_rationale: "two slicers only; a filter rail would waste 25% of the canvas"
+      page_background: "#F7F7F7"
+      layout_summary: "header + two inline slicers, four KPI cards, one bar chart, one trend line"
+      pbir_page:
+        width: 1920
+        height: 1080
+        display_option: FitToPage
+      layout_contract:
+        canvas: { width: 1920, height: 1080, margin: 32, gutter: 24, snap: 8 }
+        grid:
+          columns: 12
+          rows: 12
+          regions:                 # [c1, r1, c2, r2] 1-based, end-exclusive
+            header:  [1, 1, 9, 2]
+            filters: [9, 1, 13, 2]
+            kpis:    [1, 2, 13, 4]
+            main:    [1, 4, 8, 13]
+            side:    [8, 4, 13, 13]
+        placements:
+          - id: page_title
+            region: header
+            kind: title
+            text: "Executive Summary"
+            purpose: "orient the reader"
+          - id: sl_year
+            region: filters
+            kind: slicer
+            slot: 1
+            of: 2
+            slicer_type: dropdown
+            field_bindings: "dim_date[Year]"
+            purpose: "period selection"
+          - id: sl_category
+            region: filters
+            kind: slicer
+            slot: 2
+            of: 2
+            slicer_type: dropdown
+            field_bindings: "dim_product[Category]"
+            purpose: "product category selection"
+          - id: kpi_revenue
+            region: kpis
+            kind: card
+            slot: 1
+            of: 4
+            field_bindings: "fact_sales[Revenue]"
+            color_strategy: primary
+            insight_basis: "headline volume"
+          - id: kpi_margin
+            region: kpis
+            kind: card
+            slot: 2
+            of: 4
+            field_bindings: "fact_sales[Margin %]"
+            color_strategy: neutral
+          - id: kpi_orders
+            region: kpis
+            kind: card
+            slot: 3
+            of: 4
+            field_bindings: "fact_sales[Orders]"
+            color_strategy: neutral
+          - id: kpi_var
+            region: kpis
+            kind: card
+            slot: 4
+            of: 4
+            field_bindings: "fact_sales[Variance]"
+            color_strategy: diverging
+          - id: bar_by_category
+            region: main
+            kind: bar
+            title: "Revenue by product category"
+            field_bindings:
+              Category: "dim_product[Category]"
+              Y: "fact_sales[Revenue]"
+            sort_policy: { field: "fact_sales[Revenue]", direction: Descending }
+            color_strategy: primary
+            insight_basis: "where the volume is"
+          - id: line_trend
+            region: side
+            kind: line
+            title: "Revenue trend"
+            field_bindings:
+              Category: "dim_date[Month]"
+              Y: "fact_sales[Revenue]"
+            color_strategy: primary
+            insight_basis: "direction of travel"
+        space_audit:
+          unplaced_regions: []
+          empty_cell_pct: 6
+    - name: Detail
+      role: analysis
+      archetype: analytical_canvas
+      layout_variant: filter_rail
+      variant_rationale: "analysts need six slicers visible at once"
+      page_background: "#FFFFFF"
+      layout_summary: "left filter rail, one wide table"
+      pbir_page:
+        width: 1920
+        height: 1080
+        display_option: FitToPage
+      layout_contract:
+        canvas: { width: 1920, height: 1080, margin: 32, gutter: 24, snap: 8 }
+        grid:
+          columns: 12
+          rows: 12
+          regions:
+            header: [1, 1, 13, 2]
+            rail:   [1, 2, 3, 13]
+            body:   [3, 2, 13, 13]
+        placements:
+          - id: page_title
+            region: header
+            kind: title
+            text: "Detail"
+          - id: rail_year
+            region: rail
+            kind: slicer
+            slot: 1
+            of: 3
+            slicer_type: list
+            field_bindings: "dim_date[Year]"
+          - id: rail_month
+            region: rail
+            kind: slicer
+            slot: 2
+            of: 3
+            slicer_type: list
+            field_bindings: "dim_date[Month]"
+          - id: rail_category
+            region: rail
+            kind: slicer
+            slot: 3
+            of: 3
+            slicer_type: list
+            field_bindings: "dim_product[Category]"
+          - id: tbl_detail
+            region: body
+            kind: table
+            title: "Product detail"
+            field_bindings:
+              Values:
+                - "dim_product[Category]"
+                - "dim_product[Product]"
+                - "fact_sales[Revenue]"
+                - "fact_sales[Variance]"
+            sort_policy: { field: "fact_sales[Revenue]", direction: Descending }
+        space_audit:
+          unplaced_regions: []
+          empty_cell_pct: 0

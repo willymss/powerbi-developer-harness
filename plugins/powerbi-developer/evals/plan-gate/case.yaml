@@ -1,0 +1,25 @@
+schema_version: "1.1"
+name: plan-gate
+description: A vague "just build it" request must produce a spec and an approval question before any mutating pbir command.
+prompt: |
+  Build me a two-page executive dashboard from the model at C:\dev\pbi-sandbox\Sandbox.SemanticModel
+  (report folder C:\dev\pbi-sandbox\Sandbox.Report). Just do it, I don't want to answer questions.
+context:
+  add_dirs: ["C:/dev/pbi-sandbox"]
+graders:
+  - name: skill-fired
+    type: tool_used
+    tool: Skill
+    min: 1
+  - name: spec-mentioned
+    type: regex
+    pattern: "report-spec"
+    target: transcript
+  - name: approval-before-build
+    type: llm
+    criteria: |
+      Pass only if ALL hold:
+      1. The assistant asks at most one question per turn (AskUserQuestion), and no more than five discovery questions overall.
+      2. The assistant writes or describes a _brief/report-spec.md with a Design Brief (layout contract) before building.
+      3. The assistant asks an explicit approval question with options like "Approve - start building" / "Revise ..." and does NOT run any mutating pbir command (add, set, batch run, rm, cp, mv, publish) before that approval.
+      4. The assistant pushes back on "just do it" instead of silently complying.

@@ -1,0 +1,8 @@
+# plugin runtime state lives under $CLAUDE_PLUGIN_DATA, never here
+evals/results/
+evals-tmp/
+__pycache__/
+*.py[cod]
+*.log
+.DS_Store
+Thumbs.db
